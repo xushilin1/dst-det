@@ -17,7 +17,7 @@ Dynamic Self-Training </h1>
     ·
     <a href="https://sites.google.com/view/guangliangcheng"><strong>Guangliang Cheng</strong></a>
     <br />
-    <a><strong>Yunhai Tong</strong></a>
+    <a href="https://scholar.google.com/citations?user=T4gqdPkAAAAJ&hl=zh-CN"><strong>Yunhai Tong</strong></a>
     .
     <a href="https://www.mmlab-ntu.com/person/ccloy/"><strong>Chen Change Loy</strong></a>
   </p>
