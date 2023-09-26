@@ -7,13 +7,17 @@ Dynamic Self-Training </h1>
   <p align="center">
     <!-- ICCV, 2023 -->
     <br />
-    <a href=""><strong>Shilin Xu*</strong></a>
+    <a href="https://scholar.google.com/citations?user=8bBcL9sAAAAJ&hl=en"><strong>Shilin Xu*</strong></a>
     ·
     <a href="https://lxtgh.github.io/"><strong>Xiangtai Li*</strong></a>
     ·
+    <a href="https://wusize.github.io/"><strong>Size Wu</strong></a>
+    ·
     <a href="http://zhangwenwei.cn/"><strong>Wenwei Zhang</strong></a>
     ·
-    <a href=""><strong>Size Wu</strong></a>
+    <a href="https://scholar.google.com.hk/citations?user=y_cp1sUAAAAJ&hl=en"><strong>Yining Li</strong></a>
+    ·
+    <a href="https://chenkai.site/"><strong>Kai Chen</strong></a>
     ·
     <a href="https://sites.google.com/view/guangliangcheng"><strong>Guangliang Cheng</strong></a>
     <br />
