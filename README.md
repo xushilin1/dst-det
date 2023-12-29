@@ -50,10 +50,9 @@ Our approach proposes a dynamic self-training strategy that leverages the zero-s
 ## Citation
 If you think DST-Det is helpful in your research, please consider referring DST-Det:
 ```bibtex
-@article{xu2023dst-det,
-  title={Open-Vocabulary Object Detection via
-Dynamic Self-Training},
-  author={Shilin Xu, Xiangtai Li, Wenwei Zhang, Size Wu, Guangliang Cheng, Yunhai Tong, Chen Change Loy},
-  journal={arXiv pre-print},
-  year={2023},
+@article{xu2023dst,
+  title={DST-Det: Simple Dynamic Self-Training for Open-Vocabulary Object Detection},
+  author={Xu, Shilin and Li, Xiangtai and Wu, Size and Zhang, Wenwei and Li, Yining and Cheng, Guangliang and Tong, Yunhai and Chen, Kai and Loy, Chen Change},
+  journal={arXiv preprint arXiv:2310.01393},
+  year={2023}
 }
