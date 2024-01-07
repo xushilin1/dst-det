@@ -2,12 +2,10 @@
 
 <br />
 <p align="center">
-  <h1 align="center">Open-Vocabulary Object Detection via
-Dynamic Self-Training </h1>
+  <h1 align="center">DST-Det: Simple Dynamic Self-Training for Open-Vocabulary Object Detection</h1>
   <p align="center">
-    <!-- ICCV, 2023 -->
     <br />
-    <a href="https://scholar.google.com/citations?user=8bBcL9sAAAAJ&hl=en"><strong>Shilin Xu*</strong></a>
+    <a href="https://xushilin1.github.io/"><strong>Shilin Xu*</strong></a>
     ·
     <a href="https://lxtgh.github.io/"><strong>Xiangtai Li*</strong></a>
     ·
@@ -25,7 +23,11 @@ Dynamic Self-Training </h1>
     .
     <a href="https://www.mmlab-ntu.com/person/ccloy/"><strong>Chen Change Loy</strong></a>
   </p>
+
 <br />
+
+
+[[Project Page](https://llava-vl.github.io/)] [[Demo](https://llava.hliu.cc/)]
 
 
 
