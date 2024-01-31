@@ -27,7 +27,7 @@
 <br />
 
 
-[[Project Page](https:xushilin1.github.io/dst-det)]
+See [[Project Page](https:xushilin1.github.io/dst-det)] For the detailed results for the comparison.
 
 
 
