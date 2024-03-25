@@ -77,7 +77,18 @@ We conduct experiments on [COCO](https://cocodataset.org/#home) and [LVIS](https
 │    ├── train2017    # the same with coco
 │    ├── val2017      # the same with coco
 ```
+## Train
+Please download the pretrained model from [here](https://drive.google.com/drive/folders/1APWIE7M5zcymbjh5OONqXdBOxFy3Ghwm). And they can be organized as follows:
+```
+checkpoints
+    ├── eva_vitb16_coco_clipself_proposals.pt 
+    ├── eva_vitl14_coco_clipself_proposals.pt
+```
+Run the command below to train the model.
+```
+bash tools/dist_train.sh  configs/fvit/coco/fvit_vitl14_upsample_fpn_bs64_3e_ovcoco_eva_original.py $NUM_GPUS
 
+```
 ## Inference
 Please download the checkpoints file from 🤗[Hugging Face](https://huggingface.co/shilinxu/dst-det) and use the following command to reproduce our results.
 ```

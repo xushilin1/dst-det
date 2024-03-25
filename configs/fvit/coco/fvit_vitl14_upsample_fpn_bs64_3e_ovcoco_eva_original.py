@@ -14,7 +14,7 @@ model = dict(
         norm_cfg=norm_cfg,
         out_indices=[6, 10, 14, 23],
         model_name='EVA02-CLIP-L-14-336',
-        # pretrained='checkpoints/EVA02_CLIP_L_336_psz14_s6B.pt'
+        pretrained='checkpoints/eva_vitl14_coco_clipself_proposals.pt',
     ),
     neck=dict(
         type='FPN',

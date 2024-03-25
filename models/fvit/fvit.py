@@ -40,4 +40,37 @@ class FViT(TwoStageDetector):
                       gt_captions=None,
                       gt_embeds=None,
                       **kwargs):
-        pass
+        mlvl_feats = self.backbone(img)
+        if self.with_neck:
+            x = self.neck(mlvl_feats[:-1])
+        else:
+            x = mlvl_feats[:-1]
+
+        losses = dict()
+
+        # RPN forward and loss
+        if self.with_rpn:
+            proposal_cfg = self.train_cfg.get('rpn_proposal',
+                                              self.test_cfg.rpn)
+            rpn_losses, proposal_list = self.rpn_head.forward_train(
+                x,
+                img_metas,
+                gt_bboxes,
+                gt_labels=None,
+                gt_bboxes_ignore=gt_bboxes_ignore,
+                proposal_cfg=proposal_cfg,
+                **kwargs)
+            losses.update(rpn_losses)
+        else:
+            proposal_list = proposals
+
+        roi_losses = self.roi_head.forward_train(x, img_metas, proposal_list,
+                                                 gt_bboxes, gt_labels,
+                                                 gt_bboxes_ignore, gt_masks,
+                                                 vlm_feat=mlvl_feats[-1],
+                                                 gt_captions=gt_captions,
+                                                 gt_embeds=gt_embeds,
+                                                 **kwargs)
+        losses.update(roi_losses)
+
+        return losses

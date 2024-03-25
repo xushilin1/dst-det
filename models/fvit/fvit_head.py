@@ -291,4 +291,103 @@ class FViTRoIHead(StandardRoIHead):
                       gt_masks=None,
                       vlm_feat=None,
                       **kwargs):
-        pass
+        if self.with_bbox or self.with_mask:
+            num_imgs = len(img_metas)
+            if gt_bboxes_ignore is None:
+                gt_bboxes_ignore = [None for _ in range(num_imgs)]
+            sampling_results = []
+            for i in range(num_imgs):
+                assign_result = self.bbox_assigner.assign(
+                    proposal_list[i], gt_bboxes[i], gt_bboxes_ignore[i],
+                    gt_labels[i])
+                sampling_result = self.bbox_sampler.sample(
+                    assign_result,
+                    proposal_list[i],
+                    gt_bboxes[i],
+                    gt_labels[i],
+                    feats=[lvl_feat[i][None] for lvl_feat in x])
+                sampling_results.append(sampling_result)
+
+        losses = dict()
+        if not self.add_novel_bbox:
+            vlm_feat = None
+        # bbox head forward and loss
+        if self.with_bbox:
+            bbox_results = self._bbox_forward_train(
+                x,
+                sampling_results,
+                gt_bboxes,
+                gt_labels,
+                img_metas,
+                vlm_feat=vlm_feat)
+            losses.update(bbox_results['loss_bbox'])
+        # mask head forward and loss
+        if self.with_mask:
+            mask_results = self._mask_forward_train(
+                x, sampling_results, bbox_results['bbox_feats'], gt_masks,
+                img_metas)
+            losses.update(mask_results['loss_mask'])
+
+        return losses
+
+    
+    def _bbox_forward_train(self,
+                            x,
+                            sampling_results,
+                            gt_bboxes,
+                            gt_labels,
+                            img_metas,
+                            vlm_feat=None):
+        """Run forward function and calculate loss for box head in training."""
+
+        num_imgs = len(sampling_results)
+        
+        rois = bbox2roi([res.bboxes for res in sampling_results])
+        
+        bbox_results = self._bbox_forward(x, rois, vlm_feat=vlm_feat)
+
+        bbox_targets = self.bbox_head.get_targets(sampling_results, gt_bboxes,
+                                                  gt_labels, self.train_cfg, concat=False)
+        labels, label_weights, bbox_targets, bbox_weights = bbox_targets
+
+        if self.add_novel_bbox:
+            vlm_roi_feats = bbox_results['vlm_roi_feats']
+            all_embed = self.bbox_head.all_embed.type_as(vlm_roi_feats)
+
+            if len(all_embed.shape) > 2: # (D, 17, 66)
+                shape = all_embed.shape
+                vlm_score = vlm_roi_feats @ all_embed.reshape(shape[0], -1) * self.bbox_head.vlm_temperature
+                vlm_score = vlm_score.reshape(-1, *shape[1:]).max(1)[0]
+            else:
+                vlm_score = vlm_roi_feats @ all_embed * self.bbox_head.vlm_temperature
+            vlm_score = vlm_score.softmax(-1)
+            num_per_img = [len(s.bboxes) for s in sampling_results]
+            vlm_score = torch.split(vlm_score, num_per_img)
+            for i in range(num_imgs):
+                pseudo_label = vlm_score[i].argmax(1)
+                is_novel = (vlm_score[i][:, self.bbox_head.novel_idx] == vlm_score[i].max(1)[0][:, None]).any(1)
+                is_bg = pseudo_label == self.bbox_head.num_classes
+                is_novel[is_bg] = False
+                is_novel[:len(sampling_results[i].pos_bboxes)] = False
+                is_novel = is_novel & (vlm_score[i].max(-1)[0] > 0.8)
+                select_inds = is_novel.nonzero().view(-1)
+                if self.select_topk_novel != 0:
+                    select_inds = select_inds[:self.select_topk_novel]
+                # if self.select_random_k_novel != 0:
+                #     select_inds = select_inds[torch.randperm(len(select_inds))[:self.select_random_k_novel]]
+
+                labels[i][select_inds] = pseudo_label[select_inds]
+                label_weights[i][select_inds] = 0.2
+                
+        labels = torch.cat(labels, 0)
+        label_weights = torch.cat(label_weights, 0)
+        bbox_targets = torch.cat(bbox_targets, 0)
+        bbox_weights = torch.cat(bbox_weights, 0)
+
+        loss_bbox = self.bbox_head.loss(
+            bbox_results['cls_score'],
+            bbox_results['bbox_pred'],
+            rois, labels, label_weights, bbox_targets, bbox_weights
+        )
+        bbox_results.update(loss_bbox=loss_bbox)
+        return bbox_results
