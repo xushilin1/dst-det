@@ -12,22 +12,24 @@
     <a href="https://wusize.github.io/"><strong>Size Wu</strong></a>
     ·
     <a href="http://zhangwenwei.cn/"><strong>Wenwei Zhang</strong></a>
-    ·
-    <a href="https://scholar.google.com.hk/citations?user=y_cp1sUAAAAJ&hl=en"><strong>Yining Li</strong></a>
-    ·
-    <a href="https://chenkai.site/"><strong>Kai Chen</strong></a>
-    ·
-    <a href="https://sites.google.com/view/guangliangcheng"><strong>Guangliang Cheng</strong></a>
     <br />
     <a href="https://scholar.google.com/citations?user=T4gqdPkAAAAJ&hl=zh-CN"><strong>Yunhai Tong</strong></a>
     .
     <a href="https://www.mmlab-ntu.com/person/ccloy/"><strong>Chen Change Loy</strong></a>
   </p>
 
+  
+    <p align="center">
+    <a href='https://arxiv.org/abs/2310.01393'>
+      <img src='https://img.shields.io/badge/Paper-PDF-green?style=flat&logo=arXiv&logoColor=green' alt='arXiv PDF'> </a>
+    <a href='https://xushilin1.github.io/' style='padding-left: 0.5rem;'>
+      <img src='https://img.shields.io/badge/Project-Page-blue?style=flat&logo=Google%20chrome&logoColor=blue' alt='Project Page'> </a>
+  </p>
+
 <br />
 
 
-See [[Project Page](https:xushilin1.github.io/dst-det)] For the detailed results for the comparison.
+For the detailed comparison results, see [[Project Page](https:xushilin1.github.io/dst-det)].
 
 
 
