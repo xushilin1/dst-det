@@ -18,14 +18,22 @@
     <a href="https://www.mmlab-ntu.com/person/ccloy/"><strong>Chen Change Loy</strong></a>
   </p>
 
+  <p align="center">
+    PKU,  S-Lab(MMlab@NTU)
+  </p>
   
-    <p align="center">
+   <p align="center">
+    Xiangtai is the project leader and corresponding author.
+  </p>
+
+
+ <p align="center">
     <a href='https://arxiv.org/abs/2310.01393'>
       <img src='https://img.shields.io/badge/Paper-PDF-green?style=flat&logo=arXiv&logoColor=green' alt='arXiv PDF'> </a>
     <a href='https://xushilin1.github.io/' style='padding-left: 0.5rem;'>
       <img src='https://img.shields.io/badge/Project-Page-blue?style=flat&logo=Google%20chrome&logoColor=blue' alt='Project Page'> </a>
   </p>
-
+  
 <br />
 
 
