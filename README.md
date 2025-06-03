@@ -119,9 +119,9 @@ bash tools/dist_test.sh  configs/fvit/coco/fvit_vitl14_upsample_fpn_bs64_3e_ovco
 If you think DST-Det is helpful in your research, please consider referring DST-Det:
 ```bibtex
 @article{xu2023dst,
-  title={Dst-det: Simple dynamic self-training for open-vocabulary object detection},
+  title={DST-Det: Open-Vocabulary Object Detection via Dynamic Self-Training},
   author={Xu, Shilin and Li, Xiangtai and Wu, Size and Zhang, Wenwei and Tong, Yunhai and Loy, Chen Change},
-  journal={arXiv preprint arXiv:2310.01393},
+  journal={TCSVT},
   year={2023}
 }
 ```
